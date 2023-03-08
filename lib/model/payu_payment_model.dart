@@ -7,7 +7,7 @@ class PayuModel {
   String? firstName;
   String? phoneNumber;
   String? iosSurl;
-  String? iosFirl;
+  String? iosFurl;
   String? androidSurl;
   String? androidFurl;
   String? environment;
