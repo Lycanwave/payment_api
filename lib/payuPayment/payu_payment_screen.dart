@@ -214,7 +214,7 @@ class PayUParams {
       PayUCheckoutProConfigKeys.primaryColor: "#4994EC",
       PayUCheckoutProConfigKeys.secondaryColor: "#FFFFFF",
       PayUCheckoutProConfigKeys.merchantName: "PayU",
-      PayUCheckoutProConfigKeys.merchantLogo: "logo",
+      //PayUCheckoutProConfigKeys.merchantLogo: "logo",
       PayUCheckoutProConfigKeys.showExitConfirmationOnCheckoutScreen: true,
       PayUCheckoutProConfigKeys.showExitConfirmationOnPaymentScreen: true,
       PayUCheckoutProConfigKeys.cartDetails: cartDetails,
