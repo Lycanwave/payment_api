@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:payment_api/payuPayment/payu_payment_screen.dart';
 import 'package:payment_api/testing.dart';
 
 void main() {
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const Testing(),
+      home: const PayuPaymentScreen(),
     );
   }
 }

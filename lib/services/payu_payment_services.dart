@@ -23,7 +23,7 @@ class PayuStateServices {
 
   Future<PaymentBiodataModel> fetch_payment_biodata_details() async {
     String token =
-        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgzMzk4NDEyLCJqdGkiOiJiODYxYmMwNWNjZWM0ZWMwYWUxYTYyN2VjYzZiOTZhZiIsInVzZXJfaWQiOjE2Njh9.708K85Q-dxiBHoUTFIS6wQTFvAHQQUXsZnazjhxwe0Y';
+        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjo iYWNjZXNzIiwiZXhwIjoxNjgzMzk4NDEyLCJqdGkiOiJiODYxYmMwNWNjZWM0ZWMwYWUxYTYyN2VjYzZiOTZhZiIsInVzZXJfaWQiOjE2Njh9.708K85Q-dxiBHoUTFIS6wQTFvAHQQUXsZnazjhxwe0Y';
 
     var header = {'Authorization': 'Bearer $token'};
     final response = await http.get(Uri.parse(base_url + "biodata/details"),
@@ -39,3 +39,9 @@ class PayuStateServices {
 
   //Future<>
 }
+
+
+// [999] (){
+//   model = payustate(biodata,payment);
+//   payucheckoutpro(model)
+// }
