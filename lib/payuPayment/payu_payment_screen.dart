@@ -25,21 +25,9 @@ class _PayuPaymentScreenState extends State<PayuPaymentScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('PayU Checkout Pro'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          child: const Text("Start Payment"),
-          onPressed: () async {
-            _checkoutPro.openCheckoutScreen(
-              payUPaymentParams: PayUParams.createPayUPaymentParams(),
-              payUCheckoutProConfig: PayUParams.createPayUConfigParams(),
-            );
-          },
-        ),
-      ),
+    return _checkoutPro.openCheckoutScreen(
+      payUPaymentParams: PayUParams.createPayUPaymentParams(),
+      payUCheckoutProConfig: PayUParams.createPayUConfigParams(),
     );
   }
 
