@@ -32,7 +32,18 @@ class _TestingState extends State<Testing> {
                     child: CircularProgressIndicator(),
                   );
               })),
-          ElevatedButton(onPressed: () {}, child: Text("Press")),
+          ElevatedButton(
+              onPressed: () {
+                final responseBioData =
+                    PayuStateServices().fetch_payment_biodata_details();
+                responseBioData.then(
+                  (value) {
+                    PayuStateServices().startTransaction(txnToken, mid, orderId,
+                        amount, callBackUrl, (datas, flag) {});
+                  },
+                );
+              },
+              child: Text("Press")),
         ],
       ),
     );
