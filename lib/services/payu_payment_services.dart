@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:payment_api/constants.dart';
 import 'package:payment_api/model/payment_biodata_model.dart';
 import 'package:payment_api/model/paytm_payment_model.dart';
+import 'package:payment_api/payuPayment/payu_payment_screen.dart';
 
 class PayuStateServices {
   // Future<PaytmModel> fetch_Payment_States_Records() async {
@@ -23,7 +25,7 @@ class PayuStateServices {
 
   Future<PaymentBiodataModel> fetch_payment_biodata_details() async {
     String token =
-        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjo iYWNjZXNzIiwiZXhwIjoxNjgzMzk4NDEyLCJqdGkiOiJiODYxYmMwNWNjZWM0ZWMwYWUxYTYyN2VjYzZiOTZhZiIsInVzZXJfaWQiOjE2Njh9.708K85Q-dxiBHoUTFIS6wQTFvAHQQUXsZnazjhxwe0Y';
+        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgzNjMyMDQzLCJqdGkiOiJlYzNmNzEyZjE3NGY0NzQ5ODQyNjYwMTFiNTViODY1YSIsInVzZXJfaWQiOjE2Njh9.2-6tKoqO0o7My7vPfLtdGFLWtOEr93w44VoNq9LwlC4';
 
     var header = {'Authorization': 'Bearer $token'};
     final response = await http.get(Uri.parse(base_url + "biodata/details"),
@@ -37,7 +39,26 @@ class PayuStateServices {
     }
   }
 
-  //Future<>
+  startTransaction(txnToken, mid, orderId, amount, callBackUrl,
+      void completionHandler(datas, flag)) {
+    if (txnToken.isEmpty) {
+      return;
+    }
+
+    final responseBiodata = fetch_payment_biodata_details();
+
+    responseBiodata.then((value) {
+      var response = PayuPaymentScreen(
+        productInfo: orderId,
+        amount: amount,
+        email: value.response!.email.toString() == "null"
+            ? "rohit.kumar07feb@gmail.com"
+            : value.response!.email.toString(),
+        phoneNo: value.response!.phoneNumber.toString(),
+        firstName: value.response!.firstName.toString(),
+      );
+    });
+  }
 }
 
 

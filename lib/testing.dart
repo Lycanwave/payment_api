@@ -31,7 +31,8 @@ class _TestingState extends State<Testing> {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-              }))
+              })),
+          ElevatedButton(onPressed: () {}, child: Text("Press")),
         ],
       ),
     );

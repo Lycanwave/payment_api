@@ -7,7 +7,19 @@ import 'HashServices.dart';
 //Dont Use this file and do the hash calculation in backend.
 
 class PayuPaymentScreen extends StatefulWidget {
-  const PayuPaymentScreen({Key? key}) : super(key: key);
+  String productInfo;
+  String firstName;
+  String email;
+  String amount;
+  String phoneNo;
+  PayuPaymentScreen(
+      {Key? key,
+      required this.amount,
+      required this.email,
+      required this.firstName,
+      required this.productInfo,
+      required this.phoneNo})
+      : super(key: key);
 
   @override
   State<PayuPaymentScreen> createState() => _PayuPaymentScreenState();
