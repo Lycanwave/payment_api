@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:payment_api/model/screen_arguments.dart';
+import 'package:payment_api/services/payu_payment_services.dart';
 import 'package:payu_checkoutpro_flutter/payu_checkoutpro_flutter.dart';
 import 'package:payu_checkoutpro_flutter/PayUConstantKeys.dart';
 import 'dart:convert';
@@ -7,19 +9,21 @@ import 'HashServices.dart';
 //Dont Use this file and do the hash calculation in backend.
 
 class PayuPaymentScreen extends StatefulWidget {
-  String productInfo;
-  String firstName;
-  String email;
-  String amount;
-  String phoneNo;
-  PayuPaymentScreen(
-      {Key? key,
-      required this.amount,
-      required this.email,
-      required this.firstName,
-      required this.productInfo,
-      required this.phoneNo})
-      : super(key: key);
+  static const route = '/payupayment';
+
+  // String productInfo;
+  // String firstName;
+  // String email;
+  // String amount;
+  // String phoneNo;
+  // PayuPaymentScreen(
+  //     {Key? key,
+  //     required this.amount,
+  //     required this.email,
+  //     required this.firstName,
+  //     required this.productInfo,
+  //     required this.phoneNo})
+  //     : super(key: key);
 
   @override
   State<PayuPaymentScreen> createState() => _PayuPaymentScreenState();
@@ -28,6 +32,11 @@ class PayuPaymentScreen extends StatefulWidget {
 class _PayuPaymentScreenState extends State<PayuPaymentScreen>
     implements PayUCheckoutProProtocol {
   late PayUCheckoutProFlutter _checkoutPro;
+  // String? productInfo;
+  // String? firstName;
+  // String? email;
+  // String? amount;
+  // String? phoneNo;
 
   @override
   void initState() {
@@ -37,8 +46,14 @@ class _PayuPaymentScreenState extends State<PayuPaymentScreen>
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
+    final productInfo = args.productInfo;
+    final firstName = args.firstName;
+    final email = args.email;
+    final amount = args.amount;
+    final phoneNo = args.phoneNo;
     return _checkoutPro.openCheckoutScreen(
-      payUPaymentParams: PayUParams.createPayUPaymentParams(),
+      payUPaymentParams: PayUParams.createPayUPaymentParams(amount: amount),
       payUCheckoutProConfig: PayUParams.createPayUConfigParams(),
     );
   }
@@ -114,10 +129,11 @@ class PayUTestCredentials {
 
 //Pass these values from your app to SDK, this data is only for test purpose
 class PayUParams {
-  static Map createPayUPaymentParams() {
+  // final payu_services=PayuStateServices().startTransaction("njdcjbcbdbchd", "l1K8X1P1", "123", "999", "", (datas, flag) { });
+  static Map createPayUPaymentParams({String? amount}) {
     var siParams = {
       PayUSIParamsKeys.isFreeTrial: true,
-      PayUSIParamsKeys.billingAmount: '1', //Required
+      PayUSIParamsKeys.billingAmount: amount, //Required
       PayUSIParamsKeys.billingInterval: '1', //Required
       PayUSIParamsKeys.paymentStartDate: '2023-03-04', //Required
       PayUSIParamsKeys.paymentEndDate: '2023-04-30', //Required
@@ -153,7 +169,7 @@ class PayUParams {
 
     var payUPaymentParams = {
       PayUPaymentParamKey.key: PayUTestCredentials.merchantKey,
-      PayUPaymentParamKey.amount: "1",
+      PayUPaymentParamKey.amount: amount,
       PayUPaymentParamKey.productInfo: "Info",
       PayUPaymentParamKey.firstName: "Abc",
       PayUPaymentParamKey.email: "test@gmail.com",

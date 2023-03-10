@@ -22,6 +22,12 @@ class PayuStateServices {
   //     throw Exception('Error');
   //   }
   // }
+  String? productInfo;
+  String? firstName;
+  String? email;
+  String? amount;
+  String? phoneNo;
+
 
   Future<PaymentBiodataModel> fetch_payment_biodata_details() async {
     String token =
@@ -39,25 +45,37 @@ class PayuStateServices {
     }
   }
 
-  startTransaction(txnToken, mid, orderId, amount, callBackUrl,
+   Map startTransaction(txnToken, mid, orderId, amount, callBackUrl,
       void completionHandler(datas, flag)) {
     if (txnToken.isEmpty) {
-      return;
+      return {};
     }
 
     final responseBiodata = fetch_payment_biodata_details();
 
     responseBiodata.then((value) {
-      var response = PayuPaymentScreen(
-        productInfo: orderId,
-        amount: amount,
-        email: value.response!.email.toString() == "null"
+      productInfo=orderId;
+      amount=amount;
+      email=value.response!.email.toString() == "null"
             ? "rohit.kumar07feb@gmail.com"
-            : value.response!.email.toString(),
-        phoneNo: value.response!.phoneNumber.toString(),
-        firstName: value.response!.firstName.toString(),
-      );
+            : value.response!.email.toString();
+      firstName= value.response!.firstName.toString();
+      phoneNo= value.response!.phoneNumber.toString();
+
+      // var response = PayuPaymentScreen(
+      //   productInfo: orderId,
+      //   amount: amount,
+      //   email: value.response!.email.toString() == "null"
+      //       ? "rohit.kumar07feb@gmail.com"
+      //       : value.response!.email.toString(),
+      //   phoneNo: value.response!.phoneNumber.toString(),
+      //   firstName: value.response!.firstName.toString(),
+      // );
     });
+    return {
+      "productInfo":productInfo,
+      "amount":amount,
+    };
   }
 }
 
