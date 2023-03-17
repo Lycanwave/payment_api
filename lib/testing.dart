@@ -40,16 +40,18 @@ class _TestingState extends State<Testing> {
                     PayuStateServices().fetch_payment_biodata_details();
                 responseBioData.then(
                   (value) {
-                    Navigator.of(context).pushNamed(PayuPaymentScreen.route,
-                        arguments: ScreenArguments(
-                          productInfo: "123",
-                          amount: "999",
-                          firstName: value.response!.firstName.toString(),
-                          email: value.response!.email.toString() == "null"
-                          ? "rohit.kumar07feb@gmail.com"
-                          : value.response!.email.toString(),
-                          phoneNo: value.response!.phoneNumber.toString(),
-                        ));
+                    Navigator.of(context).pushNamed(
+                      PayuPaymentScreen.route,
+                      arguments: ScreenArguments(
+                        productInfo: "123",
+                        amount: "999",
+                        firstName: value.response!.firstName.toString(),
+                        email: value.response!.email.toString() == "null"
+                            ? "rohit.kumar07feb@gmail.com"
+                            : value.response!.email.toString(),
+                        phoneNo: value.response!.phoneNumber.toString(),
+                      ),
+                    );
                     // var response = PayuPaymentScreen(
                     //   productInfo: "123",
                     //   amount: "999",

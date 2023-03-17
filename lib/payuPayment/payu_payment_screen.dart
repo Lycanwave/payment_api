@@ -96,6 +96,10 @@ class _PayuPaymentScreenState extends State<PayuPaymentScreen>
 
   @override
   onPaymentSuccess(dynamic response) {
+    Map<String, Object> result = response;
+    // String payuResponse = result[PayUCheckoutProConstants.CP_PAYU_RESPONSE].toString();
+    // String merchantResponse = result[PayUCheckoutProConstants.CP_MERCHANT_RESPONSE].toString();
+    //Log.e(TAG, "onPaymentFailure: " + payuResponse);
     showAlertDialog(context, "onPaymentSuccess", response.toString());
   }
 
@@ -120,8 +124,8 @@ class PayUTestCredentials {
   static const merchantKey = "l1K8X1P1"; // Add you Merchant Key
   static const iosSurl = "http://www.payu.in/txnstatus";
   static const iosFurl = "http://www.payu.in/txnstatus";
-  static const androidSurl = "http://www.payu.in/txnstatus";
-  static const androidFurl = "http://www.payu.in/txnstatus";
+  static const androidSurl = "https://payuresponse.firebaseapp.com/success";
+  static const androidFurl = "https://payuresponse.firebaseapp.com/failure";
 
   static const merchantAccessKey = ""; //Add Merchant Access Key - Optional
   static const sodexoSourceId = ""; //Add sodexo Source Id - Optional
@@ -135,8 +139,8 @@ class PayUParams {
       PayUSIParamsKeys.isFreeTrial: true,
       PayUSIParamsKeys.billingAmount: amount, //Required
       PayUSIParamsKeys.billingInterval: '1', //Required
-      PayUSIParamsKeys.paymentStartDate: '2023-03-04', //Required
-      PayUSIParamsKeys.paymentEndDate: '2023-04-30', //Required
+      PayUSIParamsKeys.paymentStartDate: '2023-03-17', //Required
+      PayUSIParamsKeys.paymentEndDate: '2023-03-17', //Required
       PayUSIParamsKeys.billingCycle: //Required
           'daily', //Can be any of 'daily','weekly','yearly','adhoc','once','monthly'
       PayUSIParamsKeys.remarks: 'Test SI transaction',
@@ -238,7 +242,7 @@ class PayUParams {
       PayUCheckoutProConfigKeys.merchantResponseTimeout: 30000,
       PayUCheckoutProConfigKeys.customNotes: customNotes,
       PayUCheckoutProConfigKeys.autoSelectOtp: true,
-      // PayUCheckoutProConfigKeys.enforcePaymentList: enforcePaymentList,
+      //PayUCheckoutProConfigKeys.enforcePaymentList: enforcePaymentList,
       PayUCheckoutProConfigKeys.waitingTime: 30000,
       PayUCheckoutProConfigKeys.autoApprove: true,
       PayUCheckoutProConfigKeys.merchantSMSPermission: true,
